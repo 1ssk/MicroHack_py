@@ -1,0 +1,22 @@
+<!-- lesson.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уроки курса</title>
+    <link rel="stylesheet" href="/web/static/css/lesson.css">
+    <link rel="stylesheet" href="/web/static/css/normalize.css">
+</head>
+<body>
+    <h1>Уроки курса</h1>
+    <div class="lesson-list">
+        {{range .}}
+            <div class="lesson-item">
+                <h3>{{.Title}}</h3>
+                <a href="/video/{{.ID}}">Смотреть видео</a>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>

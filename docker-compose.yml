@@ -1,0 +1,16 @@
+services:
+  service1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service2
+
+  service2:
+    build:
+      context: ./fastapi_onboarding_api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"

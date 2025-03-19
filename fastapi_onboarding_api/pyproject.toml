@@ -1,0 +1,15 @@
+[project]
+name = "fastapi-upload-video"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi~=0.115.11",
+    "loguru>=0.7.3",
+    "psycopg2-binary~=2.9.10",
+    "python-dotenv~=1.0.1",
+    "python-multipart~=0.0.20",
+    "sqlmodel~=0.0.24",
+    "urllib3~=2.3.0",
+    "uvicorn~=0.34.0",
+]

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="/web/static/css/normalize.css">
+  <link rel="stylesheet" href="/web/static/css/register.css">
+</head>
+<body>
+  <form action="/register" method="post">
+    <h2>Регистрация</h2>
+    <div id="error-message" style="color: red;">{{ .ErrorMessage }}</div>
+    <label for="username">Логин:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+    <label for="confirm-password">Подтверждение пароля:</label>
+    <input type="password" id="confirm-password" name="confirm-password" required>
+    <input type="submit" value="Зарегистрироваться">
+    <p>Уже есть аккаунт? <a href="/login">Вход</a></p>
+  </form>
+  <script src="/web/static/js/register.js"></script>
+</body>
+</html>

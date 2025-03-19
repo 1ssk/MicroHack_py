@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет сотрудника</title>
+    <link rel="stylesheet" href="/web/static/css/index.css">
+    <link rel="stylesheet" href="/web/static/css/normalize.css">
+</head>
+<body>
+    <header>
+        <h1>Личный кабинет</h1>
+        <nav>
+            <ul>
+                <li><a href="/logout">Выход</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Мои курсы</h2>
+        <div id="courses-container">
+            <!-- Сюда будут загружаться курсы сотрудника -->
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            try {
+                let response = await fetch("/api/my-courses"); 
+                if (!response.ok) {
+                    throw new Error("Ошибка загрузки курсов");
+                }
+                let courses = await response.json();
+                let container = document.getElementById("courses-container");
+                
+                if (courses.length === 0) {
+                    container.innerHTML = "<p>У вас пока нет курсов.</p>";
+                } else {
+                    courses.forEach(course => {
+                        let courseElement = document.createElement("div");
+                        courseElement.className = "course-item";
+                        courseElement.innerHTML = `
+                            <h3>${course.title}</h3>
+                            <a href="/lessons/${course.id}">Перейти к курсу</a>
+                        `;
+                        container.appendChild(courseElement);
+                    });
+                }
+            } catch (error) {
+                console.error("Ошибка:", error);
+            }
+        });
+    </script>
+</body>
+</html>

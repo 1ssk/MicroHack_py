@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-Панель</title>
+    <link rel="stylesheet" href="/web/static/css/admin.css">
+</head>
+<body>
+    <header>
+        <h1>Админ-Панель</h1>
+        <nav>
+            <a href="/admin">Главная</a>
+            <a href="/register">Зарегистрировать сотрудника</a>
+            <a href="/logout">Выйти</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Создание курса</h2>
+            <form id="create-course-form">
+                <label for="course-title">Название курса</label>
+                <input type="text" id="course-title" name="title" required>
+                <button type="submit">Создать курс</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Создание урока</h2>
+            <form id="create-lesson-form">
+                <label for="lesson-title">Название урока</label>
+                <input type="text" id="lesson-title" name="title" required>
+                <label for="lesson-url">URL видео</label>
+                <input type="url" id="lesson-url" name="url" required>
+                <label for="lesson-course">Выберите курс</label>
+                <select id="lesson-course" name="course_id">
+                    {{range .Courses}}
+                        <option value="{{.ID}}">{{.Title}}</option>
+                    {{end}}
+                </select>
+                <button type="submit">Создать урок</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Привязка курса пользователю</h2>
+            <form id="assign-course-form">
+                <label for="user-select">Выберите пользователя</label>
+                <select id="user-select" name="user_id">
+                    {{range .Users}}
+                        <option value="{{.ID}}">{{.Username}}</option>
+                    {{end}}
+                </select>
+                <label for="course-select">Выберите курс</label>
+                <select id="course-select" name="course_id">
+                    {{range .Courses}}
+                        <option value="{{.ID}}">{{.Title}}</option>
+                    {{end}}
+                </select>
+                <button type="submit">Привязать курс</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Список курсов</h2>
+            <ul id="courses-list">
+                {{range .Courses}}
+                    <li>
+                        {{.Title}}
+                        <button class="delete-course-btn" data-course-id="{{.ID}}">Удалить</button>
+                    </li>
+                {{end}}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Список уроков</h2>
+            <ul id="lessons-list">
+                {{range .Lessons}}
+                    <li>
+                        {{.Title}} (Курс: {{.CourseTitle}})
+                        <button class="delete-lesson-btn" data-lesson-id="{{.ID}}">Удалить</button>
+                    </li>
+                {{end}}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Список пользователей</h2>
+            <ul id="users-list">
+                {{range .Users}}
+                    <li>
+                        {{.Username}}
+                        <button class="delete-user-btn" data-user-id="{{.ID}}">Удалить</button>
+                    </li>
+                {{end}}
+            </ul>
+        </section>
+    </div>
+
+    <script src="/web/static/js/admin.js"></script>
+</body>
+</html>
