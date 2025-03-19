@@ -41,7 +41,7 @@ func main() {
 	// Подключение middleware
 	router.Use(middleware.LoggingMiddleware)
 
-	// Маршруты
+	// Маршруты не защищенные
 	router.HandleFunc("/login", handlers.LoginHandler).Methods("GET", "POST")
 	// router.HandleFunc("/admin/create-course", handlers.LoginHandler).Methods("GET", "POST")
 	// router.HandleFunc("/admin/assign-course", handlers.LoginHandler).Methods("GET", "POST")
@@ -51,8 +51,9 @@ func main() {
 	// router.HandleFunc("/api/my-courses", handlers.MyCoursesHandler).Methods("GET")
 	// router.HandleFunc("/lessons/{course_id}", handlers.LessonHandler).Methods("GET")
 	// router.HandleFunc("/video/{lesson_id}", handlers.VideoHandler).Methods("GET")
-	router.Handle("/admin/change-password", middleware.AuthMiddleware(http.HandlerFunc(handlers.ChangePasswordHandler))).Methods("GET", "POST")
+
 	// Защищенные маршруты с авторизацией
+	router.Handle("/admin/change-password", middleware.AuthMiddleware(http.HandlerFunc(handlers.ChangePasswordHandler))).Methods("GET", "POST")
 	router.Handle("/", middleware.AuthMiddleware(http.HandlerFunc(handlers.IndexHandler))).Methods("GET", "POST")
 	router.Handle("/admin", middleware.AuthMiddleware(http.HandlerFunc(handlers.AdminHandler))).Methods("GET", "POST")
 	router.Handle("/admin/create-course", middleware.AuthMiddleware(http.HandlerFunc(handlers.CreateCourse))).Methods("POST")

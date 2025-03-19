@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/1ssk/MicroHack.git/internal/database" // Поменяйте на ваш путь к пакету с базой данных
+	"github.com/1ssk/MicroHack.git/internal/database"
 
 	"github.com/gorilla/mux"
 )

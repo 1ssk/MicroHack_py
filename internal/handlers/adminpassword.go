@@ -1,4 +1,4 @@
-package handlers
+package handlers // этого маршрута нет на проде но это если надо будет сменить пароль
 
 import (
 	"log"
